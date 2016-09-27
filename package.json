@@ -1,0 +1,40 @@
+{
+  "name": "utility-minijs",
+  "version": "1.0.0",
+  "description": "a Gulp utility script used to compress and concat existing vendor scripts that are not modular and can not be updated to support AMD/CommonJS practice. Designed to work in cases where the developer was not involved in the creation of said scripts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redballoon/utility-miniJS.git"
+  },
+  "keywords": [
+    "gulp",
+    "utility",
+    "minification",
+    "compression",
+    "compress",
+    "concat",
+    "concatenation",
+    "dependencies"
+  ],
+  "author": "Fredi Quirino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/redballoon/utility-miniJS/issues"
+  },
+  "homepage": "https://github.com/redballoon/utility-miniJS#readme",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-filter": "^4.0.0",
+    "gulp-header": "^1.8.8",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1",
+    "underscore": "^1.8.3"
+  }
+}
