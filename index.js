@@ -1,5 +1,3 @@
-//https://www.npmjs.com/package/gulp-uglify
-
 // dependencies
 var gulp = require('gulp'),
 	debug = require('gulp-debug'),
@@ -22,7 +20,7 @@ var Mini = (function () {
 	},
 	ignore = {},
 	bundles = {},
-	queue = [],
+	queue = null,
 	options = null;
 
 
@@ -33,6 +31,12 @@ var Mini = (function () {
 				color = chalk.green;
 			Array.prototype.splice.call(arguments, 0, 0, color(namespace + ': '));
 			console.log.apply(console, arguments);
+		},
+		reset : function () {
+			ignore = {};
+			bundles = {};
+			queue = null;
+			options.header = '';
 		},
 		/**
 		*	CompressionFilterHandler -
@@ -172,9 +176,12 @@ var Mini = (function () {
 			streams.push(uglify());
 				// reset filter
 			streams.push(bundle.compressionFilter.restore);
+				// log file to console
 			streams.push(debug({ title : 'included:', color : chalk.yellow }));
-			streams.push(concat(bundle.destination.name));
-			streams.push(header(options.header));
+				// concat files
+			streams.push(concat(bundle.destination.name, { newLine : '\n;' }));
+				// add header comment
+			if (options.header) streams.push(header(options.header));
 			streams.push(gulp.dest(bundle.destination.base));
 
 			// run stream
@@ -199,8 +206,9 @@ var Mini = (function () {
 			//methods.log('next:');
 			
 			// queue is empty
-			if (!queue.length) {
+			if (!queue || !queue.length) {
 				methods.log('next: queue is empty.');
+				methods.reset();
 				if (typeof options.complete === 'function') options.complete(true);
 				return;
 			}
